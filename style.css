@@ -70,18 +70,15 @@ ul {
   padding: 0 var(--space-md);
 }
 
-/* ---------- Textura de fondo tipo tela/seda ---------- */
+/* ---------- Textura de fondo: papel/acuarela ---------- */
 body {
+  background-color: var(--color-crema);
   background-image:
-    radial-gradient(circle at 15% 20%, rgba(155, 58, 69, 0.06), transparent 40%),
-    radial-gradient(circle at 85% 10%, rgba(201, 165, 116, 0.08), transparent 45%),
-    radial-gradient(circle at 50% 80%, rgba(107, 20, 36, 0.05), transparent 50%),
-    repeating-linear-gradient(
-      120deg,
-      rgba(255, 255, 255, 0.5) 0px,
-      rgba(255, 255, 255, 0.1) 60px,
-      rgba(250, 246, 240, 0.4) 140px
-    );
+    linear-gradient(rgba(250, 246, 240, 0.88), rgba(250, 246, 240, 0.88)),
+    url('textura-fondo.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   background-attachment: fixed;
 }
 
