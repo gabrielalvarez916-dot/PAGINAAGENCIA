@@ -424,6 +424,121 @@ p {
 }
 
 /* =========================================================
+   PÁGINA: ENCABEZADO GENÉRICO (Catálogo, Manuscritos, Contacto)
+   ========================================================= */
+.page-header {
+  padding: var(--space-xl) 0 var(--space-lg);
+  text-align: center;
+}
+
+.page-header__title {
+  font-size: clamp(2.4rem, 6vw, 3.8rem);
+}
+
+.page-header .ink-stroke {
+  margin: var(--space-sm) auto var(--space-md);
+}
+
+.page-header__lede {
+  font-size: 1.1rem;
+  max-width: 55ch;
+  margin: 0 auto;
+}
+
+/* =========================================================
+   CATÁLOGO DE AUTORES
+   ========================================================= */
+.autores-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: var(--space-lg);
+}
+
+.autor-card {
+  background-color: var(--color-blanco);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-soft);
+  overflow: hidden;
+}
+
+.autor-card__foto img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+}
+
+.autor-card__body {
+  padding: var(--space-md);
+}
+
+.autor-card__nombre {
+  font-size: 1.8rem;
+  margin-bottom: 0.2rem;
+}
+
+.autor-card__genero {
+  font-family: var(--font-display);
+  font-style: italic;
+  color: var(--color-burdeos-medio);
+  margin-bottom: var(--space-sm);
+}
+
+.autor-card__bio {
+  font-size: 1rem;
+  margin-bottom: var(--space-sm);
+}
+
+.autor-card__obras-titulo {
+  font-family: var(--font-display);
+  font-weight: 600;
+  color: var(--color-burdeos);
+  margin-bottom: 0.4rem;
+}
+
+.autor-card__obras ul {
+  margin-bottom: var(--space-sm);
+  padding-left: 1.1rem;
+}
+
+.autor-card__obras li {
+  font-size: 0.95rem;
+  margin-bottom: 0.3rem;
+  position: relative;
+  padding-left: 0.3rem;
+}
+
+.autor-card__obras li::marker {
+  color: var(--color-dorado);
+}
+
+.autor-card__obra-actual {
+  font-size: 0.98rem;
+  margin-bottom: var(--space-sm);
+}
+
+.autor-card__obra-actual em {
+  color: var(--color-burdeos);
+  font-style: italic;
+}
+
+.autor-card__social {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.95rem;
+  color: var(--color-burdeos);
+  font-weight: 500;
+}
+
+.autor-card__social .footer-icon {
+  fill: var(--color-burdeos);
+}
+
+.autor-card__social:hover {
+  color: var(--color-burdeos-medio);
+}
+
+/* =========================================================
    RESPONSIVE
    ========================================================= */
 @media (max-width: 768px) {
