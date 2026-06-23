@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   /* IMPORTANTE: la URL de Apps Script se completa cuando armemos el backend.
      Por ahora el formulario valida pero no envía a ningún lado todavía. */
-  const URL_APPS_SCRIPT = ''; // <-- ACÁ va la URL del Web App de Apps Script
+  const URL_APPS_SCRIPT = 'https://script.google.com/macros/s/AKfycbyY6MJFQFx_l4_0KTzhL1VfVlHqwVys2-o4DcDXO98ydEcOnJpU31kF6ZrRPT3lkhhjjA/exec'; 
 
   if (form) {
     form.addEventListener('submit', async (e) => {
