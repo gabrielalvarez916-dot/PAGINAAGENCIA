@@ -40,36 +40,70 @@ document.addEventListener('DOMContentLoaded', () => {
 
   if (form) {
     form.addEventListener('submit', async (e) => {
-      e.preventDefault();
+    e.preventDefault();
 
-      if (!URL_APPS_SCRIPT) {
-        formMensaje.textContent = 'El envío todavía no está conectado al backend. Esta parte se completa en el siguiente paso del proyecto.';
-        formMensaje.className = 'form-mensaje form-mensaje--info';
-        return;
+    if (!URL_APPS_SCRIPT) {
+      formMensaje.textContent = 'El envío todavía no está conectado al backend.';
+      formMensaje.className = 'form-mensaje form-mensaje--info';
+      return;
+    }
+
+    btnEnviar.disabled = true;
+    btnEnviar.textContent = 'Enviando...';
+    formMensaje.textContent = '';
+    formMensaje.className = 'form-mensaje';
+
+    try {
+      const archivo = inputArchivo.files[0];
+      if (!archivo) {
+        throw new Error('Falta adjuntar el archivo del manuscrito.');
       }
 
-      btnEnviar.disabled = true;
-      btnEnviar.textContent = 'Enviando...';
-      formMensaje.textContent = '';
-      formMensaje.className = 'form-mensaje';
+      // Convierte el archivo a base64 para poder mandarlo en el JSON.
+      const base64 = await convertirArchivoABase64(archivo);
 
-      try {
-        const formData = new FormData(form);
-        // El envío real a Apps Script se implementa acá cuando tengamos el backend.
+      const obraPublicadaInput = form.querySelector('input[name="obraPublicada"]:checked');
 
-        formMensaje.textContent = '¡Gracias! Recibimos tu manuscrito y te vamos a contactar pronto.';
-        formMensaje.className = 'form-mensaje form-mensaje--exito';
-        form.reset();
-        nombreArchivoEl.textContent = '';
-        grupoObraDetalle.style.display = 'none';
-      } catch (error) {
-        formMensaje.textContent = 'Hubo un problema al enviar tu manuscrito. Probá de nuevo o escribinos por mail.';
-        formMensaje.className = 'form-mensaje form-mensaje--error';
-      } finally {
-        btnEnviar.disabled = false;
-        btnEnviar.textContent = 'Enviar manuscrito';
-      }
-    });
+      const payload = {
+        tipo: 'manuscrito',
+        datos: {
+          nombreApellido: form.nombreApellido.value,
+          email: form.email.value,
+          redes: form.redes.value,
+          tituloManuscrito: form.tituloManuscrito.value,
+          generoTropos: form.generoTropos.value,
+          extension: form.extension.value,
+          sinopsis: form.sinopsis.value,
+          obraPublicada: obraPublicadaInput ? obraPublicadaInput.value : '',
+          obraDetalle: form.obraDetalle.value
+        },
+        archivo: {
+          nombre: archivo.name,
+          mimeType: archivo.type,
+          base64: base64
+        }
+      };
+
+      await fetch(URL_APPS_SCRIPT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+        body: JSON.stringify(payload)
+      });
+
+      formMensaje.textContent = '¡Gracias! Recibimos tu manuscrito y te vamos a contactar pronto.';
+      formMensaje.className = 'form-mensaje form-mensaje--exito';
+      form.reset();
+      nombreArchivoEl.textContent = '';
+      grupoObraDetalle.style.display = 'none';
+
+    } catch (error) {
+      formMensaje.textContent = 'Hubo un problema al enviar tu manuscrito. Probá de nuevo o escribinos por mail.';
+      formMensaje.className = 'form-mensaje form-mensaje--error';
+    } finally {
+      btnEnviar.disabled = false;
+      btnEnviar.textContent = 'Enviar manuscrito';
+    }
+  });
   }
 
 });
