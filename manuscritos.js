@@ -2,6 +2,18 @@
    INDÓMITA — LÓGICA DE LA PÁGINA MANUSCRITOS
    Este archivo SOLO se usa en manuscritos.html
    ========================================================= */
+/**
+ * Convierte un archivo (File) a string base64, sin el prefijo
+ * "data:tipo/mime;base64," que agrega el navegador.
+ */
+function convertirArchivoABase64(archivo) {
+  return new Promise((resolve, reject) => {
+    const lector = new FileReader();
+    lector.onload = () => resolve(lector.result.split(',')[1]);
+    lector.onerror = reject;
+    lector.readAsDataURL(archivo);
+  });
+}
 
 document.addEventListener('DOMContentLoaded', () => {
 
