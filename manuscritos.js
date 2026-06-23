@@ -61,7 +61,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     btnEnviar.disabled = true;
-    btnEnviar.textContent = 'Enviando...';
+    btnEnviar.textContent = 'Enviando, esto puede tardar algunos minutos...';
     formMensaje.textContent = '';
     formMensaje.className = 'form-mensaje';
 
