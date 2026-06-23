@@ -39,11 +39,17 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       };
 
-      await fetch(URL_APPS_SCRIPT, {
+    const response = await fetch(URL_APPS_SCRIPT, {
         method: 'POST',
         headers: { 'Content-Type': 'text/plain;charset=utf-8' },
         body: JSON.stringify(payload)
       });
+
+      const resultado = await response.json();
+
+      if (!resultado.ok) {
+        throw new Error(resultado.error || 'Error desconocido del servidor.');
+      }
 
       formMensaje.textContent = '¡Gracias por escribirnos! Te vamos a responder a la brevedad.';
       formMensaje.className = 'form-mensaje form-mensaje--exito';
