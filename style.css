@@ -738,3 +738,10 @@ textarea {
     align-items: center;
   }
 }
+.form-row {
+    grid-template-columns: 1fr;
+  }
+
+  .form-card {
+    padding: var(--space-md);
+  }
