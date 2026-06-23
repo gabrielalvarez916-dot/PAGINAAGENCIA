@@ -734,14 +734,15 @@ textarea {
     text-align: center;
   }
 
-  .site-footer__links {
+   .site-footer__links {
     align-items: center;
   }
-}
-.form-row {
+
+  .form-row {
     grid-template-columns: 1fr;
   }
 
   .form-card {
     padding: var(--space-md);
   }
+}
